@@ -23,6 +23,7 @@
         "cropperjs": "^1.5.13",
         "daisyui": "^2.51.5",
         "vue": "^3.2.36",
-        "vue-cropperjs": "^5.0.0"
+        "vue-cropperjs": "^5.0.0",
+        "vue-toast-notification": "^3.1.1"
     }
 }

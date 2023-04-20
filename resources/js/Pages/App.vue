@@ -44,8 +44,8 @@
             <div class="flex flex-col justify-center">
                 <h1 class="text-2xl font-bold">Result: </h1>
 
-                <textarea v-model="props.output" class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg"></textarea>
-                <button class="btn flex mt-2 w-20 max-w-sm text-white">
+                <textarea v-model="props.output" class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg" id="textarea-copy"></textarea>
+                <button type="button" class="btn flex mt-2 w-20 max-w-sm text-white" @click="copyToClipboard">
                     Copy
                 </button>
             </div>
@@ -56,7 +56,7 @@
 <script setup>
     import { ref, defineProps } from "vue";
     import { router } from '@inertiajs/vue3'
-    import axios  from "axios";
+    import {useToast} from 'vue-toast-notification';
     import VueCropper from "vue-cropperjs";
 
     const inputFile = ref(null);
@@ -64,6 +64,8 @@
     const cropper = ref(null);
     const imgSrc = ref(null);
     const preview = ref(null);
+
+    const $toast = useToast();
 
     const props = defineProps({
         output: {
@@ -111,6 +113,17 @@
 
         });
 
+    }
+
+    function copyToClipboard()
+    {
+        const textArea = document.getElementById('textarea-copy')
+
+        textArea.select()
+
+        document.execCommand('copy');
+
+        $toast.success('Copy to clipboard!');
     }
 
 </script>
