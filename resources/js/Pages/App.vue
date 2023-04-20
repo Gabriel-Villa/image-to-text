@@ -44,7 +44,7 @@
             <div class="flex flex-col justify-center">
                 <h1 class="text-2xl font-bold">Result: </h1>
 
-                <textarea class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg"></textarea>
+                <textarea v-model="props.output" class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg"></textarea>
                 <button class="btn flex mt-2 w-20 max-w-sm text-white">
                     Copy
                 </button>
@@ -54,9 +54,9 @@
 </template>
 
 <script setup>
-    import { ref } from "vue";
+    import { ref, defineProps } from "vue";
+    import { router } from '@inertiajs/vue3'
     import axios  from "axios";
-    import { useForm } from '@inertiajs/vue3'
     import VueCropper from "vue-cropperjs";
 
     const inputFile = ref(null);
@@ -65,9 +65,15 @@
     const imgSrc = ref(null);
     const preview = ref(null);
 
-    const form = useForm({
-        image: null,
-    })
+    const props = defineProps({
+        output: {
+            type: String,
+            required: false,
+            default: ''
+        }
+    });
+
+    console.log(props);
 
     function handleImageChange(event)
     {
@@ -99,19 +105,9 @@
         cropper.value.getCroppedCanvas().toBlob((blob) =>
         {
 
-            var data = new FormData();
-            data.append('cropped_picture', blob, 'cropped.png')
-
-            axios.post('/send', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            router.post('/save/image', {image: blob}, {
+                forceFormData: true,
             })
-            .then(response => {
-                console.log(response);
-            }).catch(error => {
-                console.log(error);
-            });
 
         });
 
