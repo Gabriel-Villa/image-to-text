@@ -7,7 +7,7 @@
                         <!-- <img class="w-full" ref="image" :src="imageSrc"> -->
                     </figure>
                     <div class="card-body">
-
+                        <h1 class="text-2xl font-semibold underline">Preview: </h1>
                         <img :src="preview" />
 
                         <button type="button" @click="inputFile.click()" class="btn btn-active mt-4">
@@ -44,7 +44,7 @@
             <div class="flex flex-col justify-center">
                 <h1 class="text-2xl font-bold">Result: </h1>
 
-                <textarea v-model="props.output" class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg" id="textarea-copy"></textarea>
+                <textarea v-model="$page.props.output" class="mt-2 textarea textarea-bordered textarea-lg w-5/6 h-3/6 shadow-lg" id="textarea-copy"></textarea>
                 <button type="button" class="btn flex mt-2 w-20 max-w-sm text-white" @click="copyToClipboard">
                     Copy
                 </button>
@@ -54,9 +54,9 @@
 </template>
 
 <script setup>
-    import { ref, defineProps } from "vue";
-    import { router } from '@inertiajs/vue3'
-    import {useToast} from 'vue-toast-notification';
+    import { ref } from "vue";
+    import { router, usePage } from '@inertiajs/vue3'
+    import { useToast } from 'vue-toast-notification';
     import VueCropper from "vue-cropperjs";
 
     const inputFile = ref(null);
@@ -66,16 +66,6 @@
     const preview = ref(null);
 
     const $toast = useToast();
-
-    const props = defineProps({
-        output: {
-            type: String,
-            required: false,
-            default: ''
-        }
-    });
-
-    console.log(props);
 
     function handleImageChange(event)
     {
@@ -102,17 +92,22 @@
         preview.value = null;
     }
 
+    const page = usePage();
+
+    console.log(page);
+
     function submit()
     {
         cropper.value.getCroppedCanvas().toBlob((blob) =>
         {
-
-            router.post('/save/image', {image: blob}, {
+            router.visit(route('image.store'), {
+                method: 'post',
+                data: {
+                    image: blob
+                },
                 forceFormData: true,
             })
-
         });
-
     }
 
     function copyToClipboard()

@@ -35,7 +35,7 @@ class ImageController extends Controller
 
         $output = $builder->process();
 
-        return inertia('App', ['output' => $output]);
+        return redirect()->route('home')->with('output', $output);
     }
 
 }

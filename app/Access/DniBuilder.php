@@ -41,7 +41,6 @@ class DniBuilder extends Image implements ImageContract
         $this->getExtraInformation();
     }
 
-
     public function getPersonalInformation()
     {
         app(Pipeline::class)
@@ -51,7 +50,7 @@ class DniBuilder extends Image implements ImageContract
                 GreyScale::class,
                 new Crop(width: "450", height: "510", x_offset: "343", y_offset: "107"),
                 Scale::class,
-                new BrightnessContrast(values: "15x40"),
+                new BrightnessContrast(brightness: "15", contrast: "40"),
                 new PluginTextCleaner(values: "-g -e stretch -f 35 -o 15 -s 1"),
                 Tesseract::class
             ])
@@ -87,7 +86,7 @@ class DniBuilder extends Image implements ImageContract
                 GreyScale::class,
                 new Crop(width: "1440", height: "310", x_offset: "1110", y_offset: "110"),
                 new PluginColorBoost(value: "100"),
-                new BrightnessContrast(values: "8x30"),
+                new BrightnessContrast(brightness: "8", contrast: "30"),
                 new PluginTextCleaner(values: "-g -e stretch -f 30 -o 10"),
                 Tesseract::class
             ])
