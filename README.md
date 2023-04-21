@@ -44,10 +44,10 @@ sail npm run dev
 /**
 apt-get update &&
 apt-get install -y imagemagick &&
-apt-get install software-properties-common &&
+apt-get install -y software-properties-common &&
 add-apt-repository ppa:alex-p/tesseract-ocr-devel &&
 apt-get install -y tesseract-ocr &&
-apt-get install wget
+apt-get install -y wget
 
 cd /usr/share/tesseract-ocr/5/tessdata && wget https://github.com/tesseract-ocr/tessdata/raw/main/spa.traineddata
 
