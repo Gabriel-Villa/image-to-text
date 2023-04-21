@@ -16,7 +16,7 @@ class ColorBoost extends Image
 
     public function handle($filename, Closure $next)
     {
-        Process::run("{$this->pluginsPath} -f {$this->value} {$this->imagesPath}/{$filename} {$this->imagesPath}/{$filename}");
+        Process::run("{$this->pluginsPath}/colorboost  -f {$this->value} {$this->imagesPath}/{$filename} {$this->imagesPath}/{$filename}");
 
         return $next($filename);
     }
