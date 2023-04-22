@@ -14,16 +14,11 @@ use Image;
 class ImageController extends Controller
 {
 
-    private $fileService;
-
-    public function __construct(FileService $fileService)
+    public function __invoke(StoreImageRequest $request)
     {
-        $this->fileService = $fileService;
-    }
+        $fileService = new FileService(file: $request->file('image'), path: 'public/images');
 
-    public function __invoke(StoreImageRequest $request,)
-    {
-        $imageDetails = $this->fileService->store($request->file('image'), 'public/images');
+        $imageDetails = $fileService->store();
 
         $path = Storage::disk('images')->path('') . $imageDetails['name'];
 
