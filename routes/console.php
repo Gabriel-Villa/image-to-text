@@ -4,8 +4,9 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
-Artisan::command('clean:directory {path}', function ()
+Artisan::command('clean:directory {directory}', function ()
 {
-    // sail php artisan clean:directory 'public/images'
-    Storage::deleteDirectory($this->argument('path'));
+    Storage::disk($this->argument('directory'))->deleteDirectory('');
+
+    return 0;
 });
