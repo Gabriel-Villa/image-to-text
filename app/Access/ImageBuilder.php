@@ -11,11 +11,15 @@ class ImageBuilder
     public function setBuilder(ImageContract $builder)
     {
         $this->builder = $builder;
+
+        return $this;
     }
 
     public function process()
     {
         $this->builder->treatment();
+
+        $this->builder->extractText();
 
         return $this->builder->output();
     }

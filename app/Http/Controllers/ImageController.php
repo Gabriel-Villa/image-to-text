@@ -10,21 +10,15 @@ use Image;
 
 class ImageController extends Controller
 {
+
+
     public function __invoke(StoreImageRequest $request)
     {
-        $fileService = new FileService(file: $request->file('image'), path: 'public/images');
-
-        $imageDetails = $fileService->store();
-
-        $path = storage_path().'/app/public/images/'.$imageDetails['name'];
-
-        Image::make($path)->resize(1440, 920)->save();
+        $imageDetails = (new FileService(file: $request->file('image'), path: 'public/images'))->store();
 
         $builder = new ImageBuilder();
 
-        $builder->setBuilder(new DniBuilder($imageDetails['name']));
-
-        $output = $builder->process();
+        $output = $builder->setBuilder(new DniBuilder($imageDetails['name']))->process();
 
         return redirect()->route('home')->with('output', $output);
     }

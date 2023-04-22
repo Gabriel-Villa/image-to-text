@@ -17,6 +17,7 @@ use App\Processors\Tesseract;
 use App\Processors\Threshold;
 use Illuminate\Pipeline\Pipeline;
 use Storage;
+use Image as InterventionImage;
 
 class DniBuilder extends Image implements ImageContract
 {
@@ -34,10 +35,20 @@ class DniBuilder extends Image implements ImageContract
 
     public function treatment()
     {
+        $this->resize();
+    }
+
+    public function extractText()
+    {
         $this->getDni();
         $this->getPersonalInformation();
         $this->getDates();
         $this->getExtraInformation();
+    }
+
+    public function resize()
+    {
+        InterventionImage::make(storage_path().'/app/public/images/'.$this->filename)->resize(1440, 920)->save();
     }
 
     public function getPersonalInformation()
