@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Processors\plugins;
-use App\Access\Image;
-use Illuminate\Support\Facades\Process;
-use Closure;
 
+use App\Access\Image;
+use Closure;
+use Illuminate\Support\Facades\Process;
 
 class ColorBoost extends Image
 {
-
     public function __construct(private string $value)
     {
         parent::__construct();
@@ -20,5 +19,4 @@ class ColorBoost extends Image
 
         return $next($filename);
     }
-
 }

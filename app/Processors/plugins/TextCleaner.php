@@ -3,12 +3,11 @@
 namespace App\Processors\plugins;
 
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class TextCleaner extends Image
 {
-
     public function __construct(private string $values)
     {
         parent::__construct();
@@ -20,5 +19,4 @@ class TextCleaner extends Image
 
         return $next($filename);
     }
-
 }

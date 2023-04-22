@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Processors;
+
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class Scale extends Image
 {
-
     public function __construct(public string $percent = '100')
     {
         parent::__construct();
@@ -19,5 +19,4 @@ class Scale extends Image
 
         return $next($filename);
     }
-
 }

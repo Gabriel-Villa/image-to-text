@@ -3,12 +3,11 @@
 namespace App\Processors;
 
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class Tesseract extends Image
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -20,5 +19,4 @@ class Tesseract extends Image
 
         return $next($result);
     }
-
 }

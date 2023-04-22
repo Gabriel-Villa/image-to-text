@@ -1,11 +1,9 @@
 <?php
 
-
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function ()
-{
+Route::get('/', function () {
     return inertia('App');
 })
 ->name('home');

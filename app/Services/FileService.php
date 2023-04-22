@@ -2,20 +2,19 @@
 
 namespace App\Services;
 
-
-
 class FileService
 {
-
-    public function __construct(public $file, public string $path) { }
+    public function __construct(public $file, public string $path)
+    {
+    }
 
     public function store()
     {
-        $path = $this->file->store($this->path);
+        $path = $this->file->storeAs($this->path, $this->file->getClientOriginalName());
 
         return [
             'path' => $path,
-            'name' => pathinfo($path)['basename']
+            'name' => pathinfo($path)['basename'],
         ];
     }
 
@@ -23,5 +22,4 @@ class FileService
     {
         unlink(storage_path($this->path));
     }
-
 }

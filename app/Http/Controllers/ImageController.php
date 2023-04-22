@@ -6,21 +6,17 @@ use App\Access\DniBuilder;
 use App\Access\ImageBuilder;
 use App\Http\Requests\StoreImageRequest;
 use App\Services\FileService;
-use App\Services\ImageService;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use Image;
 
 class ImageController extends Controller
 {
-
     public function __invoke(StoreImageRequest $request)
     {
         $fileService = new FileService(file: $request->file('image'), path: 'public/images');
 
         $imageDetails = $fileService->store();
 
-        $path = Storage::disk('images')->path('') . $imageDetails['name'];
+        $path = storage_path().'/app/public/images/'.$imageDetails['name'];
 
         Image::make($path)->resize(1440, 920)->save();
 
@@ -32,5 +28,4 @@ class ImageController extends Controller
 
         return redirect()->route('home')->with('output', $output);
     }
-
 }

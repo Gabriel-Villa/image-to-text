@@ -3,5 +3,5 @@
 return [
     'appPath' => '/var/www/html',
     'pluginsPath' => '/var/www/html/imagemagick',
-    'imagesPath' => "/var/www/html/storage/app/public/images",
+    'imagesPath' => '/var/www/html/storage/app/public/images',
 ];

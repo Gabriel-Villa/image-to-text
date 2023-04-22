@@ -3,8 +3,8 @@
 namespace App\Processors;
 
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class BrightnessContrast extends Image
 {

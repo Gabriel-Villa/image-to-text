@@ -3,12 +3,11 @@
 namespace App\Processors;
 
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class Custom extends Image
 {
-
     public function __construct(private string $command)
     {
         parent::__construct();
@@ -20,5 +19,4 @@ class Custom extends Image
 
         return $next($filename);
     }
-
 }

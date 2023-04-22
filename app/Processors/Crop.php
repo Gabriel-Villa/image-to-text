@@ -3,20 +3,17 @@
 namespace App\Processors;
 
 use App\Access\Image;
-use Illuminate\Support\Facades\Process;
-
 use Closure;
+use Illuminate\Support\Facades\Process;
 
 class Crop extends Image
 {
-
     public function __construct(
         private string $width,
         private string $height,
         private string $x_offset,
         private string $y_offset
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -26,6 +23,4 @@ class Crop extends Image
 
         return $next($filename);
     }
-
 }
-

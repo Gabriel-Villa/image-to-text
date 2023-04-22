@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Access;
+
 use App\Contracts\ImageContract;
 
 class ImageBuilder
 {
-
     public $builder;
 
     public function setBuilder(ImageContract $builder)
@@ -16,7 +16,7 @@ class ImageBuilder
     public function process()
     {
         $this->builder->treatment();
+
         return $this->builder->output();
     }
-
 }
