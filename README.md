@@ -1,12 +1,13 @@
 1. Clone repo:
    
 ```
-git@github.com:Gabriel-Villa/image-to-text.git
+git clone git@github.com:Gabriel-Villa/image-to-text.git
 ```
 
-2: Install dependencies composer.json
+2: Change directory && install dependencies composer.json
 
 ```
+cd image-to-text &&
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -20,9 +21,10 @@ docker run --rm \
 cp .env.example .env  
 ```
 
-4. Start sail
+4. Start sail without cache , if you dont have any images of sail php version 8.2 just run **sail up**
 ```
-sail up
+sail build --no-cache &&
+sail up -d
 ```
 
 5. Generate key
@@ -30,28 +32,13 @@ sail up
 sail php artisan key:generate
 ```
 
-6. Run migrations && seeders
+6. Run migrations
 ```
-sail php artisan migrate:fresh --seed
+sail php artisan migrate:fresh
 ```
 
 7. Install dependencies package.json && run
 ```
-sail npm i
+sail npm i &&
 sail npm run dev
 ```
-
-/**
-apt-get update &&
-apt-get install -y imagemagick &&
-apt-get install -y software-properties-common &&
-add-apt-repository ppa:alex-p/tesseract-ocr-devel &&
-apt-get install -y tesseract-ocr &&
-apt-get install -y wget
-
-cd /usr/share/tesseract-ocr/5/tessdata && wget https://github.com/tesseract-ocr/tessdata/raw/main/spa.traineddata
-
-export TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata/
-
- */
-
