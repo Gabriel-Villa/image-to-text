@@ -11,10 +11,9 @@ use Image;
 class ImageController extends Controller
 {
 
-
     public function __invoke(StoreImageRequest $request)
     {
-        $imageDetails = (new FileService(file: $request->file('image'), path: 'public/images'))->store();
+        $imageDetails = (new FileService(file: $request->file('image'), disk: 'images'))->store();
 
         $builder = new ImageBuilder();
 

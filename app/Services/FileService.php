@@ -4,22 +4,21 @@ namespace App\Services;
 
 class FileService
 {
-    public function __construct(public $file, public string $path)
+    public function __construct(public $file, public string $disk)
     {
     }
 
     public function store()
     {
-        $path = $this->file->storeAs($this->path, $this->file->getClientOriginalName());
+        $filename = $this->file->store('', 'images');
 
         return [
-            'path' => $path,
-            'name' => pathinfo($path)['basename'],
+            'name' => $filename,
         ];
     }
 
     public function delete()
     {
-        unlink(storage_path($this->path));
+        unlink($this->disk.$this->file);
     }
 }

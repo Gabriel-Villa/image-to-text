@@ -46,7 +46,7 @@ class ImageTest extends TestCase
 
         $response->assertStatus(302);
 
-        Storage::disk('images')->exists($this->filename);
+        Storage::disk('images')->assertExists($file->hashName());
     }
 
     public function test_image_is_resized_to_1440_x_920_when_saved()
@@ -57,9 +57,9 @@ class ImageTest extends TestCase
 
         $this->post(route('image.store'), ['image' => $file]);
 
-        Storage::disk('images')->exists($this->filename);
+        Storage::disk('images')->assertExists($file->hashName());
 
-        $path = storage_path('/app/public/images/'.$this->filename);
+        $path = Storage::disk('images')->path($file->hashName());
 
         $image = Image::make($path);
 

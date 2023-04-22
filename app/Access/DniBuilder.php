@@ -21,16 +21,16 @@ use Image as InterventionImage;
 
 class DniBuilder extends Image implements ImageContract
 {
-    public string $filename;
 
     public string $fileTxtResult;
+    public string $filePath;
 
-    public function __construct($filename)
+    public function __construct(public string $filename)
     {
         parent::__construct();
 
-        $this->filename = $filename;
         $this->fileTxtResult = $this->filename.'.txt';
+        $this->filePath = Storage::disk('images')->path($this->filename);
     }
 
     public function treatment()
@@ -48,7 +48,7 @@ class DniBuilder extends Image implements ImageContract
 
     public function resize()
     {
-        InterventionImage::make(storage_path().'/app/public/images/'.$this->filename)->resize(1440, 920)->save();
+        InterventionImage::make($this->filePath)->resize(1440, 920)->save();
     }
 
     public function getPersonalInformation()
