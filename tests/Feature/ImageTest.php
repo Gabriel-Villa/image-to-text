@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class ImageTest extends TestCase
@@ -66,4 +67,15 @@ class ImageTest extends TestCase
 
         $this->assertEquals(920, $image->height());
     }
+
+    public function test_homepage_returns_correct_view_with_inertia_component()
+    {
+        $this->get(route('home'))
+            ->assertOk()
+            ->assertInertia(
+                fn (AssertableInertia $page) => $page
+                ->component('App')
+            );
+    }
+
 }
