@@ -1,4 +1,4 @@
-[![Laravel](https://github.com/Gabriel-Villa/image-to-text/actions/workflows/test.yml/badge.svg)](https://github.com/Gabriel-Villa/image-to-text/actions/workflows/test.yml)
+[![Tests](https://github.com/Gabriel-Villa/image-to-text/actions/workflows/test.yml/badge.svg)](https://github.com/Gabriel-Villa/image-to-text/actions/workflows/test.yml)
 
 1. Clone repo:
    
